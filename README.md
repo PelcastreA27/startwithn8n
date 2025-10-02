@@ -21,7 +21,7 @@ However, it can easily be adapted to work with forms or other applications as in
 
 
 
-## Workflow Diagram 
+## Postman Body
 {
     "nombre completo": "Pepe Garzilla",
     "edad": 34,
