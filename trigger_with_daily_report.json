@@ -1,0 +1,807 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "formulario-registro",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -848,
+        -16
+      ],
+      "id": "1f06952f-1800-4830-9aea-ac57840e42a6",
+      "name": "Webhook",
+      "webhookId": "e460a97f-3bd6-4e25-a603-1b4127981bcc"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "801e492f-d12b-4134-8b2a-72edc47fc4cf",
+              "name": "nombre_completo",
+              "value": "={{ $json.body['nombre completo'] }}",
+              "type": "string"
+            },
+            {
+              "id": "b4acaa45-4fc9-491d-8c54-b03173e2acb1",
+              "name": "edad",
+              "value": "={{ $json.body.edad }}",
+              "type": "string"
+            },
+            {
+              "id": "47c35e98-c0f0-43d9-9bcf-a6906bbbe99e",
+              "name": "mail",
+              "value": "={{ $json.body.mail }}",
+              "type": "string"
+            },
+            {
+              "id": "3ec861be-f0a1-4bc0-bb4a-861ab4ddc2c9",
+              "name": "cel",
+              "value": "={{ $json.body.cel }}",
+              "type": "string"
+            },
+            {
+              "id": "0f9503a7-42d3-47f2-840e-c00be2200a7e",
+              "name": "empresa",
+              "value": "={{ $json.body.empresa }}",
+              "type": "string"
+            },
+            {
+              "id": "08eb640e-a6c4-47dd-8907-93b3560deace",
+              "name": "fecha_registro",
+              "value": "={{ $now }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -608,
+        -16
+      ],
+      "id": "8ab66fd2-999e-4693-a8a8-dbf1467fad5f",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e26182e4-6ca8-4746-a54d-a7d595a0eb0e",
+              "leftValue": "={{ $json.mail }}",
+              "rightValue": "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$",
+              "operator": {
+                "type": "string",
+                "operation": "regex"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -400,
+        -16
+      ],
+      "id": "687f80c7-7797-44c2-8baf-8abe4aab8998",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1k-f1ukdm6XuOdPB6Uhdwfzy3PJRQNCspYAP4fN19-wQ",
+          "mode": "list",
+          "cachedResultName": "miprojectn8n2RegisterUser",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k-f1ukdm6XuOdPB6Uhdwfzy3PJRQNCspYAP4fN19-wQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "usuarios",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k-f1ukdm6XuOdPB6Uhdwfzy3PJRQNCspYAP4fN19-wQ/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "nombre completo": "={{ $('Edit Fields').item.json.nombre_completo }}",
+            "edad": "={{ $('Edit Fields').item.json.edad }}",
+            "mail": "={{ $('Edit Fields').item.json.mail }}",
+            "cel": "={{ $('Edit Fields').item.json.cel }}",
+            "empresa": "={{ $('Edit Fields').item.json.empresa }}",
+            "fecha_registro": "={{ $('Edit Fields').item.json.fecha_registro }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "nombre completo",
+              "displayName": "nombre completo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "edad",
+              "displayName": "edad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "mail",
+              "displayName": "mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cel",
+              "displayName": "cel",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "empresa",
+              "displayName": "empresa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha_registro",
+              "displayName": "fecha_registro",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -144,
+        -112
+      ],
+      "id": "0af6f31d-2019-4324-a1ee-702acc3fff80",
+      "name": "registrar usuario valido",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "3AkYgFSeWQFpZkJP",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1k-f1ukdm6XuOdPB6Uhdwfzy3PJRQNCspYAP4fN19-wQ",
+          "mode": "list",
+          "cachedResultName": "miprojectn8n2RegisterUser",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k-f1ukdm6XuOdPB6Uhdwfzy3PJRQNCspYAP4fN19-wQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 27890924,
+          "mode": "list",
+          "cachedResultName": "errores",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k-f1ukdm6XuOdPB6Uhdwfzy3PJRQNCspYAP4fN19-wQ/edit#gid=27890924"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "nombre completo": "={{ $json.nombre_completo }}",
+            "edad": "={{ $json.edad }}",
+            "mail": "={{ $json.mail }}",
+            "cel": "={{ $json.cel }}",
+            "empresa": "={{ $json.empresa }}",
+            "fecha_registro": "={{ $json.fecha_registro }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "nombre completo",
+              "displayName": "nombre completo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "edad",
+              "displayName": "edad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "mail",
+              "displayName": "mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cel",
+              "displayName": "cel",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "empresa",
+              "displayName": "empresa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_registro",
+              "displayName": "fecha_registro",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -144,
+        128
+      ],
+      "id": "fae92d49-e845-4831-b77e-383874abc20f",
+      "name": "Usuario Invalido",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "3AkYgFSeWQFpZkJP",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.mail }}",
+        "subject": "TEst fron n8n",
+        "message": "=<!DOCTYPE html> <html lang=\"es\"> <head>     <meta charset=\"UTF-8\">     <title>Correo de Agradecimiento</title> </head> <body style=\"font-family: Arial, sans-serif; background-color: #f9f9f9; color: #333; padding: 20px;\">     <div style=\"max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);\">         <h2 style=\"color: #4a90e2;\">Hola {{$json[\"nombre completo\"]}},</h2>         <p>Gracias por completar el formulario. Aquí están los datos que proporcionaste:</p>         <ul style=\"list-style-type: none; padding: 0;\">             <li><strong>Email:</strong> {{$json[\"mail\"]}}</li>             <li><strong>Teléfono:</strong> {{$json[\"cel\"]}}</li>             <li><strong>Empresa:</strong> {{$json[\"empresa\"]}}</li>         </ul>         <p style=\"margin-top: 20px;\">¡Que tengas un excelente día!</p>     </div> </body> </html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        256,
+        -112
+      ],
+      "id": "ac154d93-c499-4165-bb4a-1a792dbf41e6",
+      "name": "Send a message",
+      "webhookId": "e96961ec-ca27-4a6a-ba86-9c967266ff71",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BMdQXVb7UKTcOgiY",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        48,
+        -112
+      ],
+      "id": "ad40e8df-bff0-4227-b6da-10ac1141d97e",
+      "name": "Esperar 5 seg",
+      "webhookId": "dbd0f5fd-f451-4ab4-a0c7-7e74038861f4"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://ipapi.co/{{ $('Webhook').item.json.headers['x-real-ip'] }}/json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -144,
+        -352
+      ],
+      "id": "a3766dee-00c4-46f5-b73e-c387c0373373",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a874a856-83ef-4a9f-9ca4-f5ae36955c22",
+              "name": "pais",
+              "value": "={{ $json.country_name }}",
+              "type": "string"
+            },
+            {
+              "id": "b731ccf7-5913-48e0-9aea-809a8b32ab3f",
+              "name": "ciudad",
+              "value": "={{ $json.region }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        96,
+        -352
+      ],
+      "id": "a1c584d6-4b19-4c04-9d5a-6e51442e7d16",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "chatId": "5977504238",
+        "text": "=Se ha registrado un nuevo usuario :  \nNombre: {{ $('Edit Fields').item.json.nombre_completo }}\nEmail:  {{ $('Edit Fields').item.json.mail }}\nCelular: {{ $('Edit Fields').item.json.cel }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        304,
+        -352
+      ],
+      "id": "3347d7e1-a563-4645-afa0-51369bc63641",
+      "name": "Envio mnsj nuevo usuario",
+      "webhookId": "2475c378-1b58-41ee-945a-2701958f2f0e",
+      "credentials": {
+        "telegramApi": {
+          "id": "bMwWG4MDuhVmyRWt",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "task": "aWtSblJWRVp1S3J3Q2F0TA",
+        "title": "=Seguimiento de Onboarding a  {{ $('Edit Fields').item.json.nombre_completo }}",
+        "additionalFields": {
+          "dueDate": "={{ $today.plus(2, 'days') }}",
+          "notes": "=Email:  {{ $('Edit Fields').item.json.mail }}\nCel:{{ $('Edit Fields').item.json.cel }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleTasks",
+      "typeVersion": 1,
+      "position": [
+        512,
+        -352
+      ],
+      "id": "6e0ea561-870d-4279-bdb8-e40365c2c448",
+      "name": "Create a task",
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "hGbjHk4eGxzOcTwx",
+          "name": "Google Tasks account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"response\": \"success\",\n\"statusCode\": 200,\n  \"nombre\": \"{{ $('Edit Fields').item.json.nombre_completo }}\",\n\"email\": \"{{ $('Edit Fields').item.json.mail }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        720,
+        -352
+      ],
+      "id": "978bcde9-2524-45cf-86ce-e4e8bc1e2093",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"status\": \"failed\",\n  \"message\":\"No se finalizo el proceso por falta de email valido\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        32,
+        128
+      ],
+      "id": "4fedbd21-d1ae-4243-ad1f-dad43ea32015",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1136,
+        -384
+      ],
+      "id": "1d7538e7-5981-4e20-b4d4-f72196a1ae78",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1k-f1ukdm6XuOdPB6Uhdwfzy3PJRQNCspYAP4fN19-wQ",
+          "mode": "list",
+          "cachedResultName": "miprojectn8n2RegisterUser",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k-f1ukdm6XuOdPB6Uhdwfzy3PJRQNCspYAP4fN19-wQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "usuarios",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k-f1ukdm6XuOdPB6Uhdwfzy3PJRQNCspYAP4fN19-wQ/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -944,
+        -416
+      ],
+      "id": "014a3855-767a-4354-9018-690c3257ad11",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "3AkYgFSeWQFpZkJP",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const registros = $input.all();\nconst hoy = new Date().toISOString().split(\"T\")[0];\n\nconst registrosHoy = registros.filter((registro) => {\n  const fechaRegistro = new Date(registro?.json?.fecha_registro)\n    .toISOString()\n    .split(\"T\")[0];\n  return fechaRegistro === hoy;\n});\n\nreturn registrosHoy;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -720,
+        -432
+      ],
+      "id": "49aa039b-8ef9-4c16-ab89-3112a481baaf",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6a2740b2-3bc7-4a11-b7e5-ed13fbd0899f",
+              "leftValue": "={{$items.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -512,
+        -448
+      ],
+      "id": "cd1b0202-bafe-475b-bb77-5f2c09ff8060",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const contacts = $input.all();\nlet htmlList = \"<ul>\";\ncontacts.forEach((contact) => {\n  htmlList += `<li><b>${contact?.json[\"nombre completo\"]}</b> - ${contact?.json?.mail}</li>`;\n});\nhtmlList += \"</ul>\";\n\nreturn { htmlList };\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -304,
+        -464
+      ],
+      "id": "01814271-19e9-472d-9af4-97846fc630fd",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "sendTo": "leoicilla@gmail.com",
+        "subject": "=Reporte Diario de Ingresos. -  {{ $now.toFormat('dd-MM-yyyy') }}",
+        "message": "=<!DOCTYPE html> <html>   <head>     <meta charset=\"UTF-8\" />     <style>       body {         font-family: Arial, sans-serif;         color: #333333;       }       .container {         padding: 20px;       }       .footer {         margin-top: 30px;         font-size: 12px;         color: #888888;       }     </style>   </head>   <body>     <div class=\"container\">       <p>Hola equipo,</p>       <p>         Les comparto la información más reciente obtenida en nuestro flujo de         trabajo:       </p>        <!-- Aquí se inserta la lista generada en otro nodo -->       {{ $json[\"htmlList\"] }}        <div class=\"footer\">         <p>           Este correo fue enviado automáticamente por <strong>n8n</strong>. Por           favor, no responder directamente a este mensaje.         </p>       </div>     </div>   </body> </html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -96,
+        -464
+      ],
+      "id": "5366829e-aee0-4e2f-8650-4acfa6d4539a",
+      "name": "Send a message1",
+      "webhookId": "0eab89c0-0a23-40b7-8dd8-3e403faacb06",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BMdQXVb7UKTcOgiY",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "registrar usuario valido",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Usuario Invalido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "registrar usuario valido": {
+      "main": [
+        [
+          {
+            "node": "Esperar 5 seg",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar 5 seg": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Envio mnsj nuevo usuario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Envio mnsj nuevo usuario": {
+      "main": [
+        [
+          {
+            "node": "Create a task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a task": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Usuario Invalido": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2c3f2f02-7a32-4fb8-9887-0062a35f2417",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dc060d6669ece14ee0df618e9b14a47d755b5ec3cfc6b604264ad75df1daee49"
+  },
+  "id": "PZgmaI6YJp5Lmsec",
+  "tags": []
+}
