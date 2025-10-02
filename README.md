@@ -19,15 +19,7 @@ However, it can easily be adapted to work with forms or other applications as in
 2. Configure credentials for Google, Telegram, and any required APIs.  
 3. Trigger the workflow manually or let the scheduled trigger run automatically.  
 
-## 🗂 Workflow Diagram
 
-```mermaid
-flowchart LR
-    A[Trigger / Postman or Form Input] --> B[Google Sheets]
-    B --> C[Gmail: Send Email to User]
-    B --> D[Telegram: Send Message]
-    B --> E[Google Tasks: Create Task]
-    F[Daily Trigger] --> G[Gmail: Send Daily Report]
 
 ## Workflow Diagram 
 {
